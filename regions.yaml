@@ -1,5 +1,9 @@
-# California MeshCore region tree — the source of truth.
+# North America MeshCore region tree. Trying to build one source of truth.
+# as regional meshes start to merge.
 #
+# derived from
+# https://github.com/matkam/meshcore-settings/blob/main/data/regions.yaml
+# 
 # Edit this file, then run `npm run build:regions` to regenerate
 # data/regions.json, which is what the site loads and what anything outside
 # this repo should consume. Both files are committed; CI checks they agree.
