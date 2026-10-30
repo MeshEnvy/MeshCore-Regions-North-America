@@ -3,6 +3,12 @@
 #
 # derived from
 # https://github.com/matkam/meshcore-settings/blob/main/data/regions.yaml
+#
+# MountainWest top-level scopes (imw, pnw, inw) are credited on the tags below.
+# Settings: https://mwmesh.com/settings.html
+# Region guide: https://regions.mwmesh.com/regions.json
+# That guide was adapted from Adam Gessaman's Pacific Northwest MeshCore
+# regions, https://gessaman.com/, with his permission.
 # 
 # Edit this file, then run `npm run build:regions` to regenerate
 # data/regions.json, which is what the site loads and what anything outside
@@ -145,7 +151,10 @@ levels:
 # with `tags:`, and only then does that name cost a table entry, on that place
 # and everything under it. A level would cost the entry on every node beneath
 # it. That is the wrong tool for a scope most operators will never send.
-# None of the states below opt into these.
+# The census tags are unused. MountainWest's imw is opt-in on the states their
+# tree parents under it. pnw and inw are not statewide, so no state slot carries them.
+# A tag with optional: true is offered on the place and starts unchecked.
+# A name in the chain is a parent. It is always loaded. The page does not ask.
 tags:
   - code: west
     name: Western US
@@ -155,6 +164,21 @@ tags:
     name: South
   - code: northeast
     name: Northeast
+  # MountainWest Mesh, already on the air.
+  # https://mwmesh.com/settings.html
+  # https://regions.mwmesh.com/regions.json
+  # Adapted from Adam Gessaman, https://gessaman.com/, with his permission.
+  # imw is a place. Nevada and the other MountainWest states sit under it,
+  # so a repeater there always carries imw. It is not a checkbox.
+  # pnw is northern Idaho and southwest Idaho (Boise). inw is northern Idaho,
+  # shared with Spokane. Neither is set on the Idaho slot, or every future
+  # child would inherit it.
+  # Local codes under these (wf, ogd, slc, boi, and the rest) are not copied.
+  # Several contain a hyphen, which a code in this file cannot.
+  - code: pnw
+    name: Pacific Northwest
+  - code: inw
+    name: Inland Northwest
 
 places:
   - code: california
@@ -813,155 +837,145 @@ places:
               "Alpine", "Spring Valley", "South Bay", "Chula Vista", "National City", "Imperial Beach", "Bonita",
               "San Ysidro", "Backcountry", "Ramona", "Julian", "Descanso", "Campo", "Warner Springs",
               "Mountain Empire", "Borrego Valley", "Borrego Springs", "Ocotillo Wells", "Anza-Borrego"]
-  - code: nevada
-    name: Nevada
-    blurb: "The state, seeded at its counties."
-    short: NEV
-    aliases: ["us-nv"]
-    outline: ["Washoe", "Storey", "Carson City", "Douglas", "Lyon", "Churchill", "Pershing",
-      "Humboldt (Nevada)", "Lander", "Eureka", "Elko", "White Pine", "Mineral", "Esmeralda", "Nye",
-      "Lincoln", "Clark"]
+  - code: imw
+    name: Intermountain West
+    kind: region
+    blurb: "MountainWest backbone. Repeaters under it carry imw."
     children:
-      - code: washoe
-        name: Washoe County
-        kind: county
-        blurb: "Reno and Sparks. Incline Village, on the lake, is part of Lake Tahoe."
-        outline: ["Washoe"]
-        county: Washoe
-        lat: 39.530
-        lon: -119.814
-        aliases: ["Reno", "Sparks", "Spanish Springs", "Sun Valley", "Verdi", "Incline Village", "Crystal Bay", "Gerlach"]
-      - code: storey
-        name: Storey County
-        kind: county
-        outline: ["Storey"]
-        county: Storey
-        lat: 39.310
-        lon: -119.650
-        aliases: ["Virginia City", "Gold Hill", "Lockwood", "Virginia City Highlands"]
-      - code: carsoncity
-        name: Carson City
-        kind: county
-        outline: ["Carson City"]
-        county: Carson City
-        lat: 39.164
-        lon: -119.767
-        aliases: ["Carson City"]
-      - code: douglas
-        name: Douglas County
-        kind: county
-        blurb: "Carson Valley. Stateline, Zephyr Cove, and Glenbrook are part of Lake Tahoe."
-        outline: ["Douglas"]
-        county: Douglas
-        lat: 38.954
-        lon: -119.766
-        aliases: ["Minden", "Gardnerville", "Genoa", "Jacks Valley", "Stateline", "Zephyr Cove", "Glenbrook"]
-      - code: lyon
-        name: Lyon County
-        kind: county
-        outline: ["Lyon"]
-        county: Lyon
-        lat: 39.608
-        lon: -119.252
-        aliases: ["Fernley", "Dayton", "Silver Springs", "Yerington", "Smith Valley"]
-      - code: churchill
-        name: Churchill County
-        kind: county
-        outline: ["Churchill"]
-        county: Churchill
-        lat: 39.474
-        lon: -118.777
-        aliases: ["Fallon"]
-      - code: pershing
-        name: Pershing County
-        kind: county
-        outline: ["Pershing"]
-        county: Pershing
-        lat: 40.179
-        lon: -118.473
-        aliases: ["Lovelock", "Imlay"]
-      # `humboldt` is already Humboldt County, California.
-      - code: humboldtnv
-        name: Humboldt County
-        kind: county
-        blurb: "Winnemucca and the I-80 corridor."
-        outline: ["Humboldt (Nevada)"]
-        county: "Humboldt (Nevada)"
-        lat: 40.973
-        lon: -117.736
-        aliases: ["Winnemucca", "McDermitt", "Paradise Valley", "Humboldt County"]
-      - code: lander
-        name: Lander County
-        kind: county
-        outline: ["Lander"]
-        county: Lander
-        lat: 40.642
-        lon: -116.934
-        aliases: ["Battle Mountain", "Austin", "Kingston"]
-      - code: eureka
-        name: Eureka County
-        kind: county
-        outline: ["Eureka"]
-        county: Eureka
-        lat: 39.513
-        lon: -115.961
-        aliases: ["Eureka", "Crescent Valley"]
-      - code: elko
-        name: Elko County
-        kind: county
-        outline: ["Elko"]
-        county: Elko
-        lat: 40.832
-        lon: -115.763
-        aliases: ["Elko", "Spring Creek", "Carlin", "Wells", "West Wendover", "Jackpot"]
-      - code: whitepine
-        name: White Pine County
-        kind: county
-        outline: ["White Pine"]
-        county: White Pine
-        lat: 39.247
-        lon: -114.889
-        aliases: ["Ely", "Ruth", "McGill", "Baker"]
-      - code: mineral
-        name: Mineral County
-        kind: county
-        outline: ["Mineral"]
-        county: Mineral
-        lat: 38.525
-        lon: -118.624
-        aliases: ["Hawthorne", "Mina", "Schurz"]
-      - code: esmeralda
-        name: Esmeralda County
-        kind: county
-        outline: ["Esmeralda"]
-        county: Esmeralda
-        lat: 37.709
-        lon: -117.235
-        aliases: ["Goldfield", "Silver Peak", "Dyer"]
-      - code: nye
-        name: Nye County
-        kind: county
-        outline: ["Nye"]
-        county: Nye
-        lat: 36.208
-        lon: -115.984
-        aliases: ["Pahrump", "Tonopah", "Beatty", "Amargosa Valley", "Gabbs"]
-      - code: lincoln
-        name: Lincoln County
-        kind: county
-        outline: ["Lincoln"]
-        county: Lincoln
-        lat: 37.930
-        lon: -114.452
-        aliases: ["Pioche", "Caliente", "Alamo", "Panaca"]
-      - code: clark
-        name: Clark County
-        kind: county
-        outline: ["Clark"]
-        county: Clark
-        lat: 36.170
-        lon: -115.140
-        aliases: ["Las Vegas", "Henderson", "North Las Vegas", "Boulder City", "Mesquite", "Laughlin"]
+      - code: nv
+        name: Nevada
+        kind: state
+        short: NV
+        aliases: ["us-nv", "nevada"]
+        children:
+          - code: washoe
+            name: Washoe County
+            kind: county
+            lat: 39.530
+            lon: -119.814
+            aliases: ["Reno", "Sparks", "Incline Village", "Spanish Springs", "Gerlach"]
+          - code: storey
+            name: Storey County
+            kind: county
+            lat: 39.310
+            lon: -119.650
+            aliases: ["Virginia City", "Gold Hill"]
+          - code: carsoncity
+            name: Carson City
+            kind: county
+            lat: 39.164
+            lon: -119.767
+            aliases: ["Carson City"]
+          - code: douglas
+            name: Douglas County
+            kind: county
+            lat: 38.954
+            lon: -119.766
+            aliases: ["Minden", "Gardnerville", "Stateline", "Zephyr Cove", "Glenbrook"]
+          - code: lyon
+            name: Lyon County
+            kind: county
+            lat: 39.608
+            lon: -119.252
+            aliases: ["Fernley", "Dayton", "Yerington", "Silver Springs"]
+          - code: churchill
+            name: Churchill County
+            kind: county
+            lat: 39.474
+            lon: -118.777
+            aliases: ["Fallon"]
+          - code: pershing
+            name: Pershing County
+            kind: county
+            lat: 40.179
+            lon: -118.473
+            aliases: ["Lovelock"]
+          # humboldt is already Humboldt County, California.
+          - code: humboldtnv
+            name: Humboldt County
+            kind: county
+            lat: 40.973
+            lon: -117.736
+            aliases: ["Winnemucca"]
+          - code: lander
+            name: Lander County
+            kind: county
+            lat: 40.642
+            lon: -116.934
+            aliases: ["Battle Mountain", "Austin"]
+          - code: eureka
+            name: Eureka County
+            kind: county
+            lat: 39.513
+            lon: -115.961
+            aliases: ["Eureka"]
+          - code: elko
+            name: Elko County
+            kind: county
+            lat: 40.832
+            lon: -115.763
+            aliases: ["Elko", "West Wendover", "Wells"]
+          - code: whitepine
+            name: White Pine County
+            kind: county
+            lat: 39.247
+            lon: -114.889
+            aliases: ["Ely"]
+          - code: mineral
+            name: Mineral County
+            kind: county
+            lat: 38.525
+            lon: -118.624
+            aliases: ["Hawthorne"]
+          - code: esmeralda
+            name: Esmeralda County
+            kind: county
+            lat: 37.709
+            lon: -117.235
+            aliases: ["Goldfield"]
+          - code: nye
+            name: Nye County
+            kind: county
+            lat: 36.208
+            lon: -115.984
+            aliases: ["Pahrump", "Tonopah"]
+          - code: lincoln
+            name: Lincoln County
+            kind: county
+            lat: 37.930
+            lon: -114.452
+            aliases: ["Pioche", "Caliente"]
+          - code: clark
+            name: Clark County
+            kind: county
+            lat: 36.170
+            lon: -115.140
+            aliases: ["Las Vegas", "Henderson", "Boulder City", "Laughlin"]
+      - code: arizona
+        name: Arizona
+        kind: state
+        placeholder: true
+        aliases: ["us-az", "az"]
+      - code: idaho
+        name: Idaho
+        kind: state
+        placeholder: true
+        aliases: ["us-id", "id"]
+      - code: montana
+        name: Montana
+        kind: state
+        placeholder: true
+        aliases: ["us-mt", "mt"]
+      - code: utah
+        name: Utah
+        kind: state
+        placeholder: true
+        aliases: ["us-ut", "ut"]
+      - code: wyoming
+        name: Wyoming
+        kind: state
+        placeholder: true
+        aliases: ["us-wy", "wy"]
 
   # Placeholder slots. The code is a proposal, not a deployed scope.
   # placeholder: true means nobody from that place has adopted it.
@@ -976,10 +990,6 @@ places:
     name: Alaska
     placeholder: true
     aliases: ["us-ak"]
-  - code: arizona
-    name: Arizona
-    placeholder: true
-    aliases: ["us-az"]
   - code: arkansas
     name: Arkansas
     placeholder: true
@@ -1012,10 +1022,6 @@ places:
     name: Hawaii
     placeholder: true
     aliases: ["us-hi"]
-  - code: idaho
-    name: Idaho
-    placeholder: true
-    aliases: ["us-id"]
   - code: illinois
     name: Illinois
     placeholder: true
@@ -1068,10 +1074,6 @@ places:
     name: Missouri
     placeholder: true
     aliases: ["us-mo"]
-  - code: montana
-    name: Montana
-    placeholder: true
-    aliases: ["us-mt"]
   - code: nebraska
     name: Nebraska
     placeholder: true
@@ -1136,10 +1138,6 @@ places:
     name: Texas
     placeholder: true
     aliases: ["us-tx"]
-  - code: utah
-    name: Utah
-    placeholder: true
-    aliases: ["us-ut"]
   - code: vermont
     name: Vermont
     placeholder: true
@@ -1160,7 +1158,3 @@ places:
     name: Wisconsin
     placeholder: true
     aliases: ["us-wi"]
-  - code: wyoming
-    name: Wyoming
-    placeholder: true
-    aliases: ["us-wy"]
